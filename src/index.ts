@@ -1,2 +1,2 @@
-export { createHandler } from "./auth"
-export { verifyRequest } from "./verify-request"
+export { createHandler } from "./auth/index.js"
+export { verifyRequest } from "./verify-request/index.js"

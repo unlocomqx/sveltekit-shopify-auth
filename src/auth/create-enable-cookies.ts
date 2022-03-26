@@ -1,10 +1,10 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
 import { AuthConfig } from "sveltekit-shopify-api"
-import { itpHelper } from "./client/itp-helper"
+import { itpHelper } from "./client/itp-helper.js"
 
-import { polarisCss } from "./client/polaris-css"
-import { topLevelInteraction } from "./client/top-level-interaction"
-import { Error } from "./errors"
+import { polarisCss } from "./client/polaris-css.js"
+import { topLevelInteraction } from "./client/top-level-interaction.js"
+import { Error } from "./errors.js"
 
 const HEADING = "Enable cookies"
 const BODY = "You must manually enable cookies in this browser in order to use this app within Shopify."

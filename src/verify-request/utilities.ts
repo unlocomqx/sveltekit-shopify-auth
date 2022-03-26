@@ -1,9 +1,9 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
 import type { AccessMode, AuthConfig } from "sveltekit-shopify-api"
 import { Shopify } from "sveltekit-shopify-api"
-import { DEFAULT_ACCESS_MODE } from "../auth"
+import { DEFAULT_ACCESS_MODE } from "../auth/index.js"
 
-import type { Routes } from "./types"
+import type { Routes } from "./types.js"
 
 export function redirectToAuth (
   event: RequestEvent,

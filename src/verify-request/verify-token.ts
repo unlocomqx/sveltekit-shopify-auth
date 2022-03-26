@@ -2,12 +2,12 @@ import type { RequestEvent } from "@sveltejs/kit/types/private"
 import cookie from "cookie"
 import type { AccessMode, AuthConfig } from "sveltekit-shopify-api"
 import { Shopify } from "sveltekit-shopify-api"
-import type { Session } from "sveltekit-shopify-api/dist/auth/session"
-import { HttpResponseError } from "sveltekit-shopify-api/dist/error"
-import { DEFAULT_ACCESS_MODE, TEST_COOKIE_NAME, TOP_LEVEL_OAUTH_COOKIE_NAME } from "../auth"
+import type { Session } from "sveltekit-shopify-api/dist/auth/session/index.js"
+import { HttpResponseError } from "sveltekit-shopify-api/dist/error.js"
+import { DEFAULT_ACCESS_MODE, TEST_COOKIE_NAME, TOP_LEVEL_OAUTH_COOKIE_NAME } from "../auth/index.js"
 
-import type { Routes } from "./types"
-import { redirectToAuth } from "./utilities"
+import type { Routes } from "./types.js"
+import { redirectToAuth } from "./utilities.js"
 
 export const REAUTH_HEADER = "X-Shopify-API-Request-Failure-Reauthorize"
 export const REAUTH_URL_HEADER =

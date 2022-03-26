@@ -1,11 +1,11 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
 import type { AccessMode, AuthConfig } from "sveltekit-shopify-api"
 import { Shopify } from "sveltekit-shopify-api"
-import type { Session } from "sveltekit-shopify-api/dist/auth/session"
-import { DEFAULT_ACCESS_MODE } from "../auth"
-import type { Options, Routes } from "./types"
-import { clearSession, redirectToAuth } from "./utilities"
-import { verifyToken } from "./verify-token"
+import type { Session } from "sveltekit-shopify-api/dist/auth/session/index.js"
+import { DEFAULT_ACCESS_MODE } from "../auth/index.js"
+import type { Options, Routes } from "./types.js"
+import { clearSession, redirectToAuth } from "./utilities.js"
+import { verifyToken } from "./verify-token.js"
 
 export function verifyRequest (givenOptions: Options = {}) {
   const { accessMode, returnHeader } = {

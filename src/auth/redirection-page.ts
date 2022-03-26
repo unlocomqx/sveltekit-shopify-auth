@@ -5,7 +5,7 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const baseDir = path.dirname(path.dirname(path.dirname(__filename)))
 const APP_BRIDGE_SCRIPT = fs.readFileSync(
-  path.resolve(path.join(baseDir, `src/auth/client/app-bridge-2.0.12.js`)),
+  path.resolve(path.join(baseDir, `dist/auth/client/app-bridge-2.0.12.js`)),
 )
 
 export function redirectionPage ({ origin, redirectTo, apiKey, host }) {

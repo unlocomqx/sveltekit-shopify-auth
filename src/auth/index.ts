@@ -62,7 +62,7 @@ export function getCookieOptions (request: Request) {
   return cookieOptions
 }
 
-export function createAuthHook (options: AuthConfig) {
+export function createHandler (options: AuthConfig) {
   const config = {
     keys           : [],
     prefix         : "",

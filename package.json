@@ -8,6 +8,10 @@
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "yarn run build"
+  },
   "devDependencies": {
     "@sveltejs/kit": "^1.0.0-next.303",
     "@types/cookie": "^0.4.1",

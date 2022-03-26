@@ -24,6 +24,7 @@
   },
   "files": [
     "dist/*",
+    "src/auth/client/app-bridge-2.0.12.js",
     "!tsconfig.tsbuildinfo"
   ]
 }

@@ -1,16 +1,8 @@
-import fs from "fs"
-import path from "path"
-import { fileURLToPath } from "url"
-
-const __filename = fileURLToPath(import.meta.url)
-const baseDir = path.dirname(path.dirname(path.dirname(__filename)))
-const APP_BRIDGE_SCRIPT = fs.readFileSync(
-  path.resolve(path.join(baseDir, `src/auth/client/app-bridge-2.0.12.js`)),
-)
+import { app_brige_script } from "./client/app-bridge-script"
 
 export function redirectionPage ({ origin, redirectTo, apiKey, host }) {
   return `
-    <script>${ APP_BRIDGE_SCRIPT }</script>
+    <script>${ app_brige_script }</script>
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         if (window.top === window.self) {

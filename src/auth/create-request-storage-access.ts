@@ -1,8 +1,6 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
-import fs from "fs"
-import path from "path"
 import type { AuthConfig } from "sveltekit-shopify-api"
-import { fileURLToPath } from "url"
+import { app_brige_script } from "./client/app-bridge-script"
 
 import { itpHelper } from "./client/itp-helper.js"
 import { polarisCss } from "./client/polaris-css.js"
@@ -13,12 +11,6 @@ import { Error } from "./errors.js"
 const HEADING = "This app needs access to your browser data"
 const BODY = "Your browser is blocking this app from accessing your data. To continue using this app, click Continue, then click Allow if the browser prompts you."
 const ACTION = "Continue"
-
-const __filename = fileURLToPath(import.meta.url)
-const baseDir = path.dirname(path.dirname(path.dirname(__filename)))
-const APP_BRIDGE_SCRIPT = fs.readFileSync(
-  path.resolve(path.join(baseDir, `src/auth/client/app-bridge-2.0.12.js`)),
-)
 
 export default function createRequestStorageAccess
 ({
@@ -49,7 +41,7 @@ export default function createRequestStorageAccess
   <base target="_top">
   <title>Redirecting…</title>
 
-  <script>${ APP_BRIDGE_SCRIPT }</script>
+  <script>${ app_brige_script }</script>
   <script>
     window.apiKey = "${ API_KEY }";
     window.host = "${ host }";

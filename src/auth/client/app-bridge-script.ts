@@ -1,4 +1,4 @@
-!(function(t, e) {
+export const app_brige_script = `!(function(t, e) {
   "object" == typeof exports && "object" == typeof module
     ? (module.exports = e())
     : "function" == typeof define && define.amd
@@ -200,7 +200,7 @@
             (this.subgroups = []),
             (this.subscriptions = []),
           t ||
-          p.throwError(p.Action.INVALID_ACTION, "Missing required `app`"),
+          p.throwError(p.Action.INVALID_ACTION, "Missing required \`app\`"),
             (this.id = n || l.default()),
             (this.defaultGroup = r);
           var i = this.set;
@@ -636,7 +636,7 @@
               action: t,
               message:
                 e ||
-                "The action's has missing/invalid values for `group`, `type` or `version`",
+                "The action's has missing/invalid values for \`group\`, \`type\` or \`version\`",
               type: n.INVALID_ACTION,
             },
             type: n.INVALID_ACTION,
@@ -1791,7 +1791,7 @@
 
       function a(t) {
         return t.replace(
-          new RegExp("^" + o.PREFIX + o.SEPARATOR + "\\w+" + o.SEPARATOR),
+          new RegExp("^" + o.PREFIX + o.SEPARATOR + "\\\\w+" + o.SEPARATOR),
           "",
         );
       }
@@ -2553,7 +2553,7 @@
 
         function c(t, e, r, n) {
           if ("number" == typeof e)
-            throw new TypeError("\"value\" argument must not be a number");
+            throw new TypeError("\\"value\\" argument must not be a number");
           return "undefined" != typeof ArrayBuffer && e instanceof ArrayBuffer
             ? (function(t, e, r, n) {
               if ((e.byteLength, r < 0 || e.byteLength < r))
@@ -2576,7 +2576,7 @@
                 ("string" == typeof r && "" !== r) || (r = "utf8");
                 if (!u.isEncoding(r))
                   throw new TypeError(
-                    "\"encoding\" must be a valid string encoding",
+                    "\\"encoding\\" must be a valid string encoding",
                   );
                 var n = 0 | l(e, r),
                   o = (t = s(t, n)).write(e, r);
@@ -2608,9 +2608,9 @@
 
         function p(t) {
           if ("number" != typeof t)
-            throw new TypeError("\"size\" argument must be a number");
+            throw new TypeError("\\"size\\" argument must be a number");
           if (t < 0)
-            throw new RangeError("\"size\" argument must not be negative");
+            throw new RangeError("\\"size\\" argument must not be negative");
         }
 
         function f(t, e) {
@@ -3016,7 +3016,7 @@
           (u.concat = function(t, e) {
             if (!i(t))
               throw new TypeError(
-                "\"list\" argument must be an Array of Buffers",
+                "\\"list\\" argument must be an Array of Buffers",
               );
             if (0 === t.length) return u.alloc(0);
             var r;
@@ -3028,7 +3028,7 @@
               var a = t[r];
               if (!u.isBuffer(a))
                 throw new TypeError(
-                  "\"list\" argument must be an Array of Buffers",
+                  "\\"list\\" argument must be an Array of Buffers",
                 );
               a.copy(n, o), (o += a.length);
             }
@@ -3212,9 +3212,9 @@
 
         function M(t, e, r, n, o, i) {
           if (!u.isBuffer(t))
-            throw new TypeError("\"buffer\" argument must be a Buffer instance");
+            throw new TypeError("\\"buffer\\" argument must be a Buffer instance");
           if (e > o || e < i)
-            throw new RangeError("\"value\" argument is out of bounds");
+            throw new RangeError("\\"value\\" argument is out of bounds");
           if (r + n > t.length) throw new RangeError("Index out of range");
         }
 
@@ -3594,7 +3594,7 @@
             }
             return this;
           });
-        var G = /[^+\/0-9A-Za-z-_]/g;
+        var G = /[^+\\/0-9A-Za-z-_]/g;
 
         function k(t) {
           return t < 16 ? "0" + t.toString(16) : t.toString(16);
@@ -3651,7 +3651,7 @@
             (function(t) {
               if (
                 (t = (function(t) {
-                  return t.trim ? t.trim() : t.replace(/^\s+|\s+$/g, "");
+                  return t.trim ? t.trim() : t.replace(/^\\s+|\\s+$/g, "");
                 })(t).replace(G, "")).length < 2
               )
                 return "";
@@ -3763,7 +3763,7 @@
     },
     function(t) {
       t.exports = JSON.parse(
-        "{\"name\":\"@shopify/app-bridge\",\"version\":\"2.0.12\",\"types\":\"index.d.ts\",\"main\":\"index.js\",\"unpkg\":\"umd/index.js\",\"jsdelivr\":\"umd/index.js\",\"files\":[\"/actions/\",\"/client/\",\"/umd/\",\"/util/\",\"/validate/\",\"/development.d.ts\",\"/development.js\",\"/index.d.ts\",\"/index.js\",\"/MessageTransport.d.ts\",\"/MessageTransport.js\",\"/production.d.ts\",\"/production.js\"],\"private\":false,\"publishConfig\":{\"access\":\"public\",\"@shopify:registry\":\"https://registry.npmjs.org\"},\"repository\":\"git@github.com:Shopify/app-bridge.git\",\"homepage\":\"https://shopify.dev/tools/app-bridge\",\"author\":\"Shopify Inc.\",\"license\":\"MIT\",\"scripts\":{\"build\":\"yarn build:tsc && yarn build:npm && yarn build:umd\",\"build:tsc\":\"NODE_ENV=production tsc\",\"build:umd\":\"NODE_ENV=production webpack -p\",\"build:npm\":\"shx cp -r ./npm/index.js ./index.js\",\"check\":\"tsc\",\"clean\":\"cat package.json | node -pe \\\"JSON.parse(require('fs').readFileSync('/dev/stdin').toString()).files.map(f => './'+f).join(' ')\\\" | xargs rm -rf\",\"pack\":\"yarn pack\",\"size\":\"size-limit\"},\"sideEffects\":false,\"size-limit\":[{\"limit\":\"17 KB\",\"path\":\"production.js\"}],\"dependencies\":{\"base64url\":\"^3.0.1\"},\"devDependencies\":{\"@types/node\":\"^10.12.5\",\"shx\":\"^0.3.3\"}}",
+        "{\\"name\\":\\"@shopify/app-bridge\\",\\"version\\":\\"2.0.12\\",\\"types\\":\\"index.d.ts\\",\\"main\\":\\"index.js\\",\\"unpkg\\":\\"umd/index.js\\",\\"jsdelivr\\":\\"umd/index.js\\",\\"files\\":[\\"/actions/\\",\\"/client/\\",\\"/umd/\\",\\"/util/\\",\\"/validate/\\",\\"/development.d.ts\\",\\"/development.js\\",\\"/index.d.ts\\",\\"/index.js\\",\\"/MessageTransport.d.ts\\",\\"/MessageTransport.js\\",\\"/production.d.ts\\",\\"/production.js\\"],\\"private\\":false,\\"publishConfig\\":{\\"access\\":\\"public\\",\\"@shopify:registry\\":\\"https://registry.npmjs.org\\"},\\"repository\\":\\"git@github.com:Shopify/app-bridge.git\\",\\"homepage\\":\\"https://shopify.dev/tools/app-bridge\\",\\"author\\":\\"Shopify Inc.\\",\\"license\\":\\"MIT\\",\\"scripts\\":{\\"build\\":\\"yarn build:tsc && yarn build:npm && yarn build:umd\\",\\"build:tsc\\":\\"NODE_ENV=production tsc\\",\\"build:umd\\":\\"NODE_ENV=production webpack -p\\",\\"build:npm\\":\\"shx cp -r ./npm/index.js ./index.js\\",\\"check\\":\\"tsc\\",\\"clean\\":\\"cat package.json | node -pe \\\\\\"JSON.parse(require('fs').readFileSync('/dev/stdin').toString()).files.map(f => './'+f).join(' ')\\\\\\" | xargs rm -rf\\",\\"pack\\":\\"yarn pack\\",\\"size\\":\\"size-limit\\"},\\"sideEffects\\":false,\\"size-limit\\":[{\\"limit\\":\\"17 KB\\",\\"path\\":\\"production.js\\"}],\\"dependencies\\":{\\"base64url\\":\\"^3.0.1\\"},\\"devDependencies\\":{\\"@types/node\\":\\"^10.12.5\\",\\"shx\\":\\"^0.3.3\\"}}",
       );
     },
     function(t, e) {
@@ -6956,12 +6956,12 @@
         function i(t) {
           return (
             (t = t.toString()),
-              n.default(t).replace(/\-/g, "+").replace(/_/g, "/")
+              n.default(t).replace(/\\-/g, "+").replace(/_/g, "/")
           );
         }
 
         function a(t) {
-          return t.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+          return t.replace(/=/g, "").replace(/\\+/g, "-").replace(/\\//g, "_");
         }
 
         var s = o;
@@ -7209,4 +7209,4 @@
         o(r(5), e);
     },
   ]);
-});
+});`

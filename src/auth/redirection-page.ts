@@ -1,4 +1,4 @@
-import { app_brige_script } from "./client/app-bridge-script"
+import { app_brige_script } from "./client/app-bridge-script.js"
 
 export function redirectionPage ({ origin, redirectTo, apiKey, host }) {
   return `

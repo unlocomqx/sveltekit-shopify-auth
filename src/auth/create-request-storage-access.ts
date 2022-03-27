@@ -1,6 +1,6 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
 import type { AuthConfig } from "sveltekit-shopify-api"
-import { app_brige_script } from "./client/app-bridge-script"
+import { app_brige_script } from "./client/app-bridge-script.js"
 
 import { itpHelper } from "./client/itp-helper.js"
 import { polarisCss } from "./client/polaris-css.js"

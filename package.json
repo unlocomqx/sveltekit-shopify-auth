@@ -1,6 +1,6 @@
 {
   "name": "sveltekit-shopify-auth",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A handler to authenticate a SvelteKit application with Shopify",
   "repository": "https://github.com/unlocomqx/sveltekit-shopify-auth",
   "author": "unlocomqx <amxmodx.unloco@gmail.com>",

@@ -42,7 +42,8 @@ export function createTopLevelRedirect (apiKey: string, path: string) {
         host,
       }), {
         headers: {
-          "set-cookie": cookie.serialize(TOP_LEVEL_OAUTH_COOKIE_NAME, "1", getCookieOptions(event.request)),
+          "content-type": "text/html;charset=UTF-8",
+          "set-cookie"  : cookie.serialize(TOP_LEVEL_OAUTH_COOKIE_NAME, "1", getCookieOptions(event.request)),
         },
       },
     )

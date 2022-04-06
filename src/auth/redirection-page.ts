@@ -1,27 +1,32 @@
-import { app_brige_script } from "./client/app-bridge-script.js"
-
-export function redirectionPage ({ origin, redirectTo, apiKey, host }) {
-  return `
-    <script>${ app_brige_script }</script>
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
+export function topLevelAuthRedirect ({ apiKey, hostName, shop }) {
+  return `<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/@shopify/app-bridge@2"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
         if (window.top === window.self) {
-          // If the current window is the 'parent', change the URL by setting location.href
-          window.location.href = "${ redirectTo }";
+          window.location.href = '/auth?shop=${ shop }';
         } else {
-          // If the current window is the 'child', change the parent's URL with postMessage
           var AppBridge = window['app-bridge'];
           var createApp = AppBridge.default;
           var Redirect = AppBridge.actions.Redirect;
-          var app = createApp({
-            apiKey: "${ apiKey }",
-            host: "${ host }",
-            shopOrigin: "${ encodeURI(origin) }",
+
+          const app = createApp({
+            apiKey: '${ apiKey }',
+            shopOrigin: '${ shop }',
           });
-          var redirect = Redirect.create(app);
-          redirect.dispatch(Redirect.Action.REMOTE, "${ redirectTo }");
+
+          const redirect = Redirect.create(app);
+
+          redirect.dispatch(
+            Redirect.Action.REMOTE,
+            'https://${ hostName }/auth/toplevel?shop=${ shop }',
+          );
         }
       });
     </script>
-  `
+  </head>
+  <body></body>
+</html>`
 }

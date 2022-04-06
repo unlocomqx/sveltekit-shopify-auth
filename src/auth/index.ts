@@ -1,12 +1,11 @@
 import type { RequestEvent } from "@sveltejs/kit/types/private"
 import cookie from "cookie"
-import querystring from "querystring"
 import type { AuthConfig, AuthQuery } from "sveltekit-shopify-api"
 import { AccessMode, Shopify } from "sveltekit-shopify-api"
 import { createEnableCookies } from "./create-enable-cookies.js"
 import createRequestStorageAccess from "./create-request-storage-access.js"
 import { Error } from "./errors.js"
-import { redirectionPage } from "./redirection-page.js"
+import { topLevelAuthRedirect } from "./redirection-page.js"
 
 const DEFAULT_MYSHOPIFY_DOMAIN = "myshopify.com"
 export const DEFAULT_ACCESS_MODE = AccessMode.ONLINE
@@ -26,20 +25,16 @@ function shouldPerformInlineOAuth (cookies: Record<string, string>) {
   return Boolean(cookies[TOP_LEVEL_OAUTH_COOKIE_NAME])
 }
 
-export function createTopLevelRedirect (apiKey: string, path: string) {
+export function createTopLevelRedirect (config: AuthConfig) {
   return function topLevelRedirect (event: RequestEvent): Response {
     const { searchParams } = event.url
     const shop = searchParams.get("shop")
-    const host = searchParams.get("shop")
 
-    const params = { shop }
-    const queryString = querystring.stringify(params)
     return new Response(
-      redirectionPage({
-        origin    : shop,
-        redirectTo: `https://${ event.url.host }${ path }?${ queryString }`,
-        apiKey,
-        host,
+      topLevelAuthRedirect({
+        apiKey  : config.API_KEY,
+        hostName: config.HOST_NAME,
+        shop
       }), {
         headers: {
           "content-type": "text/html;charset=UTF-8",
@@ -78,11 +73,8 @@ export function createHandler (options: AuthConfig) {
   const oAuthStartPath = `${ prefix }/auth`
   const oAuthCallbackPath = `${ oAuthStartPath }/callback`
 
-  const inlineOAuthPath = `${ prefix }/auth/inline`
-  const topLevelOAuthRedirect = createTopLevelRedirect(
-    config.API_KEY,
-    inlineOAuthPath,
-  )
+  const oAuthTopLevelPath = `${ prefix }/auth/toplevel`
+  const topLevelOAuthRedirect = createTopLevelRedirect(config)
 
   const enableCookiesPath = `${ oAuthStartPath }/enable_cookies`
   const enableCookies = createEnableCookies(config)
@@ -94,18 +86,16 @@ export function createHandler (options: AuthConfig) {
 
     const cookies = cookie.parse(request.headers.get("cookie") || "")
 
-    if (
-      url.pathname === oAuthStartPath &&
-      !hasCookieAccess(cookies) &&
-      !grantedStorageAccess(cookies)
-    ) {
-      return requestStorageAccess(event)
-    }
+    if (url.pathname === oAuthStartPath) {
+      if (shouldPerformInlineOAuth(cookies)) {
+        return new Response(null, {
+          status : 302,
+          headers: {
+            location: `${ oAuthTopLevelPath }?shop=${ url.searchParams.get("shop") }`,
+          },
+        })
+      }
 
-    if (
-      url.pathname === inlineOAuthPath ||
-      (url.pathname === oAuthStartPath && shouldPerformInlineOAuth(cookies))
-    ) {
       const shop = query.get("shop")
       if (shop == null) {
         return new Response(null, {
@@ -134,7 +124,7 @@ export function createHandler (options: AuthConfig) {
       })
     }
 
-    if (url.pathname === oAuthStartPath) {
+    if (url.pathname === oAuthTopLevelPath) {
       return topLevelOAuthRedirect(event)
     }
 

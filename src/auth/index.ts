@@ -144,7 +144,6 @@ export function createHandler (options: AuthConfig) {
           return config.afterAuth(result)
         }
       } catch (e) {
-        console.error(e)
         switch (true) {
           case e instanceof Shopify.Errors.InvalidOAuthError:
             return new Response(null, {
